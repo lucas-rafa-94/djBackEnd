@@ -4,6 +4,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.Date;
+import java.util.List;
 
 @Document
 public class EventModel {
@@ -14,13 +15,19 @@ public class EventModel {
     private Date date;
     private String description;
     private String photoUri;
+    private String passphrase;
+    private List<String> playlists;
+    private boolean avaiable;
 
-    public EventModel(String id, String name, Date date, String description, String photoUri) {
+    public EventModel(String id, String name, Date date, String description, String photoUri, String passphrase, List<String> playlists, boolean avaiable) {
         this.id = id;
         this.name = name;
         this.date = date;
         this.description = description;
         this.photoUri = photoUri;
+        this.passphrase = passphrase;
+        this.playlists = playlists;
+        this.avaiable = avaiable;
     }
 
     public EventModel() {
@@ -64,5 +71,29 @@ public class EventModel {
 
     public void setPhotoUri(String photoUri) {
         this.photoUri = photoUri;
+    }
+
+    public String getPassphrase() {
+        return passphrase;
+    }
+
+    public void setPassphrase(String passphrase) {
+        this.passphrase = passphrase;
+    }
+
+    public List<String> getPlaylists() {
+        return playlists;
+    }
+
+    public void setPlaylists(List<String> playlists) {
+        this.playlists = playlists;
+    }
+
+    public boolean isAvaiable() {
+        return avaiable;
+    }
+
+    public void setAvaiable(boolean avaiable) {
+        this.avaiable = avaiable;
     }
 }

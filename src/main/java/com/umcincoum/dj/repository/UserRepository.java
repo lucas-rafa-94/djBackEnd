@@ -6,4 +6,6 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 
 @Document
 public interface UserRepository extends MongoRepository<UserModel, String> {
+    UserModel findByEmailAndAndPassword(String email, String password);
+    UserModel findByEmail(String email);
 }
