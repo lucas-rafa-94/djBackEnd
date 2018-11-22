@@ -71,10 +71,14 @@ public class UserService {
 
             List<EventModel> listEvents = new ArrayList<>();
             userQuery = userRepository.findByEmail(email);
-            listEvents = userQuery.getEvents();
-            listEvents.add(event);
-            userQuery.setEvents(listEvents);
-
+            if(userQuery.getEvents() != null){
+                listEvents = userQuery.getEvents();
+                listEvents.add(event);
+                userQuery.setEvents(listEvents);
+            }else{
+                listEvents.add(event);
+                userQuery.setEvents(listEvents);
+            }
             userRepository.save(userQuery);
 
         }else{
@@ -83,4 +87,6 @@ public class UserService {
 
         return userQuery;
     }
+
+
 }

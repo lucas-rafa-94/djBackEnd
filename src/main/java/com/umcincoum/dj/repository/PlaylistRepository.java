@@ -9,4 +9,5 @@ import java.util.List;
 @Repository
 public interface PlaylistRepository extends MongoRepository<PlaylistModel, String> {
     List<PlaylistModel> findByEventModel_Id(String event);
+    PlaylistModel findByPlaylist(String playlist);
 }

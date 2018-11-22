@@ -9,13 +9,13 @@ import java.util.List;
 public class PlaylistModel {
 
     @Id
-    private String id;
+    private String playlist;
     private EventModel eventModel;
     private String genre;
     private List<TrackSelectedModel> trackSelectedModelList;
 
-    public PlaylistModel(String id, EventModel eventModel, String genre, List<TrackSelectedModel> trackSelectedModelList) {
-        this.id = id;
+    public PlaylistModel(String playlist, EventModel eventModel, String genre, List<TrackSelectedModel> trackSelectedModelList) {
+        this.playlist = playlist;
         this.eventModel = eventModel;
         this.genre = genre;
         this.trackSelectedModelList = trackSelectedModelList;
@@ -24,12 +24,12 @@ public class PlaylistModel {
     public PlaylistModel() {
     }
 
-    public String getId() {
-        return id;
+    public String getPlaylist() {
+        return playlist;
     }
 
-    public void setId(String id) {
-        this.id = id;
+    public void setPlaylist(String playlist) {
+        this.playlist = playlist;
     }
 
     public EventModel getEventModel() {
