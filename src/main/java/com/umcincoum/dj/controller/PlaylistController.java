@@ -32,6 +32,6 @@ public class PlaylistController {
 
     @PostMapping("/{playlist}/vote")
     public void voteOnMusicByPlaylist(@PathVariable String playlist, @RequestParam String email, @RequestParam String music){
-
+        playlistService.voteOnMusicByPlaylist(music,playlist,email);
     }
 }

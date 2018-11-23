@@ -8,8 +8,7 @@ import com.umcincoum.dj.repository.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 @Service
 public class PlaylistService {
@@ -52,8 +51,42 @@ public class PlaylistService {
     }
 
     public PlaylistModel getPlaylistFromId(String playlist){
-        return playlistRepository.findByPlaylist(playlist);
+
+        PlaylistModel playlistModel = new PlaylistModel();
+        playlistModel = playlistRepository.findByPlaylist(playlist);
+    if(playlistModel.getTrackSelectedModelList() != null){
+        List<TrackSelectedModel> trackSelectedModelList = playlistModel.getTrackSelectedModelList();
+
+        Collections.sort(trackSelectedModelList,
+                Comparator.comparingInt(TrackSelectedModel::getLikes).reversed());
+
+        playlistModel.setTrackSelectedModelList(trackSelectedModelList);
     }
 
-//    public void voteOnMusicByPlaylist (String )
+
+        return playlistModel;
+    }
+
+    public void voteOnMusicByPlaylist (String music, String playlist, String email ){
+        PlaylistModel playlistModel = new PlaylistModel();
+        playlistModel = playlistRepository.findByPlaylist(playlist);
+
+        for(int i = 0; i < playlistModel.getTrackSelectedModelList().size(); i++){
+            if (playlistModel.getTrackSelectedModelList().get(i).getMusic().equals(music)){
+                int votes = playlistModel.getTrackSelectedModelList().get(i).getLikes();
+                playlistModel.getTrackSelectedModelList().get(i).setLikes(votes + 1);
+
+                List<String> emails = new ArrayList<>();
+                if(playlistModel.getTrackSelectedModelList().get(i).getUsersVoted() != null){
+                    emails = playlistModel.getTrackSelectedModelList().get(i).getUsersVoted();
+                    emails.add(email);
+
+                }else{
+                    emails.add(email);
+                }
+                playlistModel.getTrackSelectedModelList().get(i).setUsersVoted(emails);
+                playlistRepository.save(playlistModel);
+            }
+        }
+    }
 }
