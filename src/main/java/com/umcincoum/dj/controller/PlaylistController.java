@@ -1,5 +1,6 @@
 package com.umcincoum.dj.controller;
 
+import com.umcincoum.dj.model.canonical.ResponseCall;
 import com.umcincoum.dj.model.mongoDb.PlaylistModel;
 import com.umcincoum.dj.model.mongoDb.TrackSelectedModel;
 import com.umcincoum.dj.service.PlaylistService;
@@ -21,8 +22,8 @@ public class PlaylistController {
     }
 
     @PostMapping()
-    public void putMusicOnPlaylist(@RequestParam String playlist, @RequestBody TrackSelectedModel trackSelectedModel){
-        playlistService.putTrackOnPlaylist(playlist, trackSelectedModel);
+    public ResponseCall putMusicOnPlaylist(@RequestParam String playlist, @RequestBody TrackSelectedModel trackSelectedModel){
+       return playlistService.putTrackOnPlaylist(playlist, trackSelectedModel);
     }
 
     @GetMapping("/{playlist}")

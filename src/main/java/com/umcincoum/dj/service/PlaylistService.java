@@ -1,5 +1,6 @@
 package com.umcincoum.dj.service;
 
+import com.umcincoum.dj.model.canonical.ResponseCall;
 import com.umcincoum.dj.model.mongoDb.EventModel;
 
 import com.umcincoum.dj.model.mongoDb.PlaylistModel;
@@ -33,13 +34,21 @@ public class PlaylistService {
         return playlistRepository.findByEventModel_Id(event);
     }
 
-    public void putTrackOnPlaylist(String playlist, TrackSelectedModel trackSelectedModel){
+    public ResponseCall putTrackOnPlaylist(String playlist, TrackSelectedModel trackSelectedModel){
+        ResponseCall responseCall = new ResponseCall();
         PlaylistModel playlistModel = new PlaylistModel();
         playlistModel = playlistRepository.findByPlaylist(playlist);
 
         if(playlistModel != null){
             List<TrackSelectedModel> listTracks = new ArrayList<>();
             if (playlistModel.getTrackSelectedModelList() != null){
+                for(int i = 0; i<playlistModel.getTrackSelectedModelList().size(); i++){
+                    if(playlistModel.getTrackSelectedModelList().get(i).getMusic().equals(trackSelectedModel.getMusic())){
+                        responseCall.setStatus("ERRO");
+                        responseCall.setDescription("JA EXISTENTE");
+                        return responseCall;
+                    }
+                }
                 listTracks = playlistModel.getTrackSelectedModelList();
                 listTracks.add(trackSelectedModel);
             }else{
@@ -48,6 +57,11 @@ public class PlaylistService {
             playlistModel.setTrackSelectedModelList(listTracks);
         }
         playlistRepository.save(playlistModel);
+
+        responseCall.setStatus("SUCESSO");
+        responseCall.setDescription("SUCESSO");
+
+        return responseCall;
     }
 
     public PlaylistModel getPlaylistFromId(String playlist){
