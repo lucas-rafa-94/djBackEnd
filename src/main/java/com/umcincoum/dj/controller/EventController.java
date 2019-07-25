@@ -23,10 +23,13 @@ public class EventController {
         eventService.createEvent(event);
         playlistService.createPlaylistByEvent(event.getPlaylists(), event);
     }
-
     @GetMapping
     public List<EventModel> getAllEvents(){
         return eventService.getAllEvents();
     }
 
+    @GetMapping("/{name}")
+    public EventModel getEventByName(@PathVariable String name){
+        return eventService.getByName(name);
+    }
 }

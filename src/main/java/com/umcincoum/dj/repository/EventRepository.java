@@ -11,4 +11,6 @@ public interface EventRepository extends MongoRepository<EventModel, String> {
     @Override
     List<EventModel> findAll();
 
+    EventModel findByName(String id);
+
 }

@@ -12,6 +12,10 @@ public class EventService {
     @Autowired
     EventRepository eventRepository;
 
+    public EventModel getByName(String name){
+        return eventRepository.findByName(name);
+    }
+
     public void createEvent(EventModel eventModel){
         eventRepository.insert(eventModel);
     }

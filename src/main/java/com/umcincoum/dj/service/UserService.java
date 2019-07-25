@@ -3,6 +3,7 @@ package com.umcincoum.dj.service;
 import com.umcincoum.dj.model.canonical.ResponseCall;
 import com.umcincoum.dj.model.mongoDb.EventModel;
 import com.umcincoum.dj.model.mongoDb.UserModel;
+import com.umcincoum.dj.repository.EventRepository;
 import com.umcincoum.dj.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,6 +16,9 @@ public class UserService {
 
     @Autowired
     UserRepository userRepository;
+
+    @Autowired
+    EventService eventService;
 
     public ResponseCall insertUser(UserModel userModel){
         ResponseCall responseCall = new ResponseCall();
@@ -63,20 +67,58 @@ public class UserService {
         return userRepository.findByEmail(email);
     }
 
-    public UserModel updateEventUser(String email, EventModel event){
+    public UserModel updateEventUserWithEventBody(String email, EventModel event){
 
         UserModel userQuery = new UserModel();
 
         if (userRepository.findByEmail(email) != null) {
 
             List<EventModel> listEvents = new ArrayList<>();
+
             userQuery = userRepository.findByEmail(email);
+
             if(userQuery.getEvents() != null){
                 listEvents = userQuery.getEvents();
                 listEvents.add(event);
                 userQuery.setEvents(listEvents);
             }else{
                 listEvents.add(event);
+                userQuery.setEvents(listEvents);
+            }
+            userRepository.save(userQuery);
+
+        }else{
+            userQuery = null;
+        }
+
+        return userQuery;
+    }
+
+    public UserModel updateEventUserWithEventId(String email, String name){
+
+        UserModel userQuery = new UserModel();
+        EventModel eventQuery = new EventModel();
+        boolean exists = false;
+
+
+        if (userRepository.findByEmail(email) != null) {
+            eventQuery = eventService.getByName(name);
+
+            List<EventModel> listEvents = new ArrayList<>();
+            userQuery = userRepository.findByEmail(email);
+
+            if(userQuery.getEvents() != null){
+                for(int i = 0; i < userQuery.getEvents().size(); i++ ){
+                    if(userQuery.getEvents().get(i).getName().equals(eventQuery.getName())){
+                        exists = true;
+                    }
+                }
+                if(!exists){
+                    listEvents.add(eventQuery);
+                    userQuery.setEvents(listEvents);
+                }
+            }else{
+                listEvents.add(eventQuery);
                 userQuery.setEvents(listEvents);
             }
             userRepository.save(userQuery);

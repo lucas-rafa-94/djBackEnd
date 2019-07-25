@@ -25,8 +25,13 @@ public class UserController {
     }
 
     @PostMapping("/{email}/event")
-    public UserModel updateEventUser (@PathVariable String email, @RequestBody EventModel event){
-        return userService.updateEventUser(email, event);
+    public UserModel updateEventUserWithEventBody (@PathVariable String email, @RequestBody EventModel event){
+        return userService.updateEventUserWithEventBody(email, event);
+    }
+
+    @PostMapping("/{email}/event/{name}")
+    public UserModel updateEventUserWithEventId (@PathVariable String email, @PathVariable String name){
+        return userService.updateEventUserWithEventId(email, name);
     }
 
     @GetMapping("/{email}")
