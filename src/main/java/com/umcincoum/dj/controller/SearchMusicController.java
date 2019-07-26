@@ -31,4 +31,8 @@ public class SearchMusicController {
     public List<TracksModel> getTracksFromArtist(@RequestParam("name") String name, @RequestParam("track") String track){
         return searchMusicService.getTracksFromArtistWithTrack(name,track);
     }
+    @GetMapping("/by-track")
+    public List<TracksModel> getTracksFromArtist(@RequestParam("track") String track){
+        return searchMusicService.getTracks(track);
+    }
 }

@@ -2,11 +2,13 @@ package com.umcincoum.dj.model;
 
 public class TracksModel {
 
+    private String artist;
     private String name;
     private String photoUri;
     private String id;
 
-    public TracksModel(String name, String photoUri, String id) {
+    public TracksModel(String artist, String name, String photoUri, String id) {
+        this.artist = artist;
         this.name = name;
         this.photoUri = photoUri;
         this.id = id;
@@ -37,5 +39,13 @@ public class TracksModel {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getArtist() {
+        return artist;
+    }
+
+    public void setArtist(String artist) {
+        this.artist = artist;
     }
 }

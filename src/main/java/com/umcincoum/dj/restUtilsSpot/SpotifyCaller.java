@@ -45,12 +45,14 @@ public class SpotifyCaller {
 
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString("https://api.spotify.com/v1/search")
-                .queryParam("q", artist + "*")
+                .queryParam("q", "artist:" + artist + "*")
                 .queryParam("type", "artist");
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
 
-        return restTemplate.exchange(builder.toUriString(), HttpMethod.GET, entity, String.class);
+        String uri = "https://api.spotify.com/v1/search?q=artist:"+ artist +"*&type=artist";
+
+        return restTemplate.exchange(uri, HttpMethod.GET, entity, String.class);
     }
 
     public ResponseEntity<String> getTopTracksFromArtistSpotCaller(String id){
@@ -80,6 +82,34 @@ public class SpotifyCaller {
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString("https://api.spotify.com/v1/search")
                 .queryParam("q", "artist:" + artist + " track:" + track + "*")
+                .queryParam("type", "track")
+                .queryParam("market", "BR");
+
+
+
+        try{
+            finalUri = URLDecoder.decode(builder.toUriString(), "UTF-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+
+        return restTemplate.exchange(finalUri, HttpMethod.GET, entity, String.class);
+    }
+
+
+    public ResponseEntity<String> getTracks(String track){
+        String finalUri = "";
+
+        HttpHeaders headers = new HttpHeaders();
+        RestTemplate restTemplate = new RestTemplate();
+
+        headers.add("Authorization", "Bearer " + tokenSpotCaller());
+
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString("https://api.spotify.com/v1/search")
+                .queryParam("q", "track:" + track + "*")
                 .queryParam("type", "track")
                 .queryParam("market", "BR");
 
