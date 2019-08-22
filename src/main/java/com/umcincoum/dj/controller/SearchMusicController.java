@@ -40,12 +40,9 @@ public class SearchMusicController {
     public List<TracksModel> getTracksFromArtist(@RequestParam("name") String name, @RequestParam("track") String track){
         return searchMusicService.getTracksFromArtistWithTrack(name,track);
     }
-<<<<<<< HEAD
 
-=======
     @GetMapping("/by-track")
     public List<TracksModel> getTracksFromArtist(@RequestParam("track") String track){
         return searchMusicService.getTracks(track);
     }
->>>>>>> 7e571caa7b9208d42d481d22e1a2f1b971e3ddcf
 }

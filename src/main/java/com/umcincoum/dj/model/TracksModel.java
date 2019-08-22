@@ -5,16 +5,12 @@ public class TracksModel {
     private String artist;
     private String name;
     private String photoUri;
-    private String artist;
     private String album;
     private String id;
 
-<<<<<<< HEAD
-    public TracksModel(String name, String photoUri, String artist, String album, String id) {
-=======
+
     public TracksModel(String artist, String name, String photoUri, String id) {
         this.artist = artist;
->>>>>>> 7e571caa7b9208d42d481d22e1a2f1b971e3ddcf
         this.name = name;
         this.photoUri = photoUri;
         this.artist = artist;
@@ -65,11 +61,4 @@ public class TracksModel {
         this.id = id;
     }
 
-    public String getArtist() {
-        return artist;
-    }
-
-    public void setArtist(String artist) {
-        this.artist = artist;
-    }
 }

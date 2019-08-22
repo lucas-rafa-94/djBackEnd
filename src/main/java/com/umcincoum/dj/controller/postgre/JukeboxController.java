@@ -50,6 +50,6 @@ public class JukeboxController {
 
     @GetMapping("/playlist/{playlist}/filter")
     public List<TbJukeboxMusic> getByMusicsByPlaylist(@PathVariable String playlist, @RequestParam String music){
-        return tbJukeboxMusicService.queryByPlaylistFilterMusic(playlist, music);
+        return tbJukeboxMusicService.queryByPlaylistFilterMusic(playlist, music.toUpperCase());
     }
 }

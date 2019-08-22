@@ -90,7 +90,7 @@ public class SearchMusicService {
         return tracksArrayOutput;
     }
 
-<<<<<<< HEAD
+
 
         public List<TbJukeboxMusic> getTracksFromPlaylist(String playlist){
 
@@ -127,9 +127,11 @@ public class SearchMusicService {
 
             return tracksArrayOutput;
         }
-    }
 
-=======
+
+
+
+
     public List<TracksModel> getTracks(String track){
 
         List<TracksModel> tracksArrayOutput = new ArrayList<>();
@@ -160,5 +162,5 @@ public class SearchMusicService {
         Map<Object, Boolean> map = new ConcurrentHashMap<>();
         return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
     }
+
 }
->>>>>>> 7e571caa7b9208d42d481d22e1a2f1b971e3ddcf

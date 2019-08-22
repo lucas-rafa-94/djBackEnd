@@ -23,18 +23,21 @@ public class UserService {
     public ResponseCall insertUser(UserModel userModel){
         ResponseCall responseCall = new ResponseCall();
         try {
-            if (userRepository.findByEmail(userModel.getEmail()) == null) {
+            if (userRepository.findByEmail(userModel.getEmail().toLowerCase()) == null) {
                 List<EventModel> listEvent = new ArrayList<>();
 
                 userModel.setEvents(listEvent);
 
-                userRepository.save(userModel);
+                UserModel userModel1 = new UserModel();
+                userModel1.setEmail(userModel.getEmail().toLowerCase());
+                userModel1.setPassword(userModel.getEmail());
+
+                userRepository.save(userModel1);
 
                 responseCall.setStatus("Success");
                 responseCall.setDescription("Usuário criado com sucesso!");
 
             }else{
-
                 responseCall.setStatus("Failed");
                 responseCall.setDescription("Email já cadastrado!");
 
@@ -51,10 +54,10 @@ public class UserService {
         UserModel userModelReceived = new UserModel();
 
         try {
-            if (userRepository.findByEmailAndAndPassword(userModel.getEmail(), userModel.getPassword()) == null) {
+            if (userRepository.findByEmailAndAndPassword(userModel.getEmail().toLowerCase(), userModel.getPassword()) == null) {
                 userModelReceived = null;
             }else{
-                userModelReceived = userRepository.findByEmailAndAndPassword(userModel.getEmail(), userModel.getPassword());
+                userModelReceived = userRepository.findByEmailAndAndPassword(userModel.getEmail().toLowerCase(), userModel.getPassword());
             }
         }catch (Exception e){
             e.printStackTrace();
@@ -64,18 +67,18 @@ public class UserService {
     }
 
     public UserModel getUserFromEmail(String email){
-        return userRepository.findByEmail(email);
+        return userRepository.findByEmail(email.toLowerCase());
     }
 
     public UserModel updateEventUserWithEventBody(String email, EventModel event){
 
         UserModel userQuery = new UserModel();
 
-        if (userRepository.findByEmail(email) != null) {
+        if (userRepository.findByEmail(email.toLowerCase()) != null) {
 
             List<EventModel> listEvents = new ArrayList<>();
 
-            userQuery = userRepository.findByEmail(email);
+            userQuery = userRepository.findByEmail(email.toLowerCase());
 
             if(userQuery.getEvents() != null){
                 listEvents = userQuery.getEvents();
@@ -101,11 +104,11 @@ public class UserService {
         boolean exists = false;
 
 
-        if (userRepository.findByEmail(email) != null) {
+        if (userRepository.findByEmail(email.toLowerCase()) != null) {
             eventQuery = eventService.getByName(name);
 
             List<EventModel> listEvents = new ArrayList<>();
-            userQuery = userRepository.findByEmail(email);
+            userQuery = userRepository.findByEmail(email.toLowerCase());
 
             if(userQuery.getEvents() != null){
                 for(int i = 0; i < userQuery.getEvents().size(); i++ ){
