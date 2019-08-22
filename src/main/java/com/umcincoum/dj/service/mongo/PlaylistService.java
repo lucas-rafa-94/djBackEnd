@@ -1,11 +1,11 @@
-package com.umcincoum.dj.service;
+package com.umcincoum.dj.service.mongo;
 
 import com.umcincoum.dj.model.canonical.ResponseCall;
 import com.umcincoum.dj.model.mongoDb.EventModel;
 
 import com.umcincoum.dj.model.mongoDb.PlaylistModel;
 import com.umcincoum.dj.model.mongoDb.TrackSelectedModel;
-import com.umcincoum.dj.repository.PlaylistRepository;
+import com.umcincoum.dj.repository.mongo.PlaylistRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

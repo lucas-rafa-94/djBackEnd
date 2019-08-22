@@ -1,9 +1,9 @@
-package com.umcincoum.dj.controller;
+package com.umcincoum.dj.controller.mongo;
 
 import com.umcincoum.dj.model.canonical.ResponseCall;
 import com.umcincoum.dj.model.mongoDb.PlaylistModel;
 import com.umcincoum.dj.model.mongoDb.TrackSelectedModel;
-import com.umcincoum.dj.service.PlaylistService;
+import com.umcincoum.dj.service.mongo.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

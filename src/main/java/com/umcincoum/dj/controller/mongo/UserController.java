@@ -1,9 +1,9 @@
-package com.umcincoum.dj.controller;
+package com.umcincoum.dj.controller.mongo;
 
 import com.umcincoum.dj.model.canonical.ResponseCall;
 import com.umcincoum.dj.model.mongoDb.EventModel;
 import com.umcincoum.dj.model.mongoDb.UserModel;
-import com.umcincoum.dj.service.UserService;
+import com.umcincoum.dj.service.mongo.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

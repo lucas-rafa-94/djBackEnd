@@ -1,8 +1,8 @@
-package com.umcincoum.dj.controller;
+package com.umcincoum.dj.controller.mongo;
 
 import com.umcincoum.dj.model.mongoDb.EventModel;
-import com.umcincoum.dj.service.EventService;
-import com.umcincoum.dj.service.PlaylistService;
+import com.umcincoum.dj.service.mongo.EventService;
+import com.umcincoum.dj.service.mongo.PlaylistService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

@@ -1,10 +1,10 @@
-package com.umcincoum.dj.service;
+package com.umcincoum.dj.service.mongo;
 
 import com.umcincoum.dj.model.canonical.ResponseCall;
 import com.umcincoum.dj.model.mongoDb.EventModel;
 import com.umcincoum.dj.model.mongoDb.UserModel;
-import com.umcincoum.dj.repository.EventRepository;
-import com.umcincoum.dj.repository.UserRepository;
+import com.umcincoum.dj.repository.mongo.UserRepository;
+import com.umcincoum.dj.service.mongo.EventService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

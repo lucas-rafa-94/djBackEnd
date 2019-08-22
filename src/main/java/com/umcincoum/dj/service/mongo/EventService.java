@@ -1,7 +1,7 @@
-package com.umcincoum.dj.service;
+package com.umcincoum.dj.service.mongo;
 
 import com.umcincoum.dj.model.mongoDb.EventModel;
-import com.umcincoum.dj.repository.EventRepository;
+import com.umcincoum.dj.repository.mongo.EventRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

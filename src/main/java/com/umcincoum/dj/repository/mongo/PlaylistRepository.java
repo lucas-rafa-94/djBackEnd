@@ -1,4 +1,4 @@
-package com.umcincoum.dj.repository;
+package com.umcincoum.dj.repository.mongo;
 
 import com.umcincoum.dj.model.mongoDb.PlaylistModel;
 import org.springframework.data.mongodb.repository.MongoRepository;

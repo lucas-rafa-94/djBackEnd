@@ -3,6 +3,7 @@ package com.umcincoum.dj.controller;
 import com.umcincoum.dj.model.ArtistsModel;
 import com.umcincoum.dj.model.TracksModel;
 import com.umcincoum.dj.service.SearchMusicService;
+import com.umcincoum.dj.service.postgre.TbJukeboxMusicService;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import org.springframework.web.bind.annotation.*;
@@ -17,6 +18,9 @@ public class SearchMusicController {
     @Autowired
     SearchMusicService searchMusicService;
 
+    @Autowired
+    TbJukeboxMusicService tbJukeboxMusicService;
+
     @GetMapping
     public List<ArtistsModel> getArtists(@RequestParam("artists") String artist){
         return searchMusicService.getArtists(artist);
@@ -27,8 +31,14 @@ public class SearchMusicController {
         return searchMusicService.getTopTracksFromArtist(id);
     }
 
+    @GetMapping("/playlist/{id}")
+    public void loadPlaylist(@PathVariable("id") String id){
+        tbJukeboxMusicService.loadPlaylist(id);
+    }
+
     @GetMapping("/artist")
     public List<TracksModel> getTracksFromArtist(@RequestParam("name") String name, @RequestParam("track") String track){
         return searchMusicService.getTracksFromArtistWithTrack(name,track);
     }
+
 }

@@ -16,6 +16,8 @@ import java.net.URLDecoder;
 @Service
 public class SpotifyCaller {
 
+    private static String user = "12154043033";
+
     public static String tokenSpotCaller(){
 
         HttpHeaders headers = new HttpHeaders();
@@ -82,6 +84,31 @@ public class SpotifyCaller {
                 .queryParam("q", "artist:" + artist + " track:" + track + "*")
                 .queryParam("type", "track")
                 .queryParam("market", "BR");
+
+
+
+        try{
+            finalUri = URLDecoder.decode(builder.toUriString(), "UTF-8");
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+
+        return restTemplate.exchange(finalUri, HttpMethod.GET, entity, String.class);
+    }
+
+    public ResponseEntity<String> getTracksFromPlaylist(String playlist){
+        String finalUri = "";
+
+        HttpHeaders headers = new HttpHeaders();
+        RestTemplate restTemplate = new RestTemplate();
+
+        headers.add("Authorization", "Bearer " + tokenSpotCaller());
+
+        UriComponentsBuilder builder = UriComponentsBuilder
+                .fromUriString("https://api.spotify.com/v1/users/" + user + "/playlists/" + playlist)
+                .queryParam("fields", "tracks.items(artist,track(id,name,album(artists,name,images)))");
 
 
 
