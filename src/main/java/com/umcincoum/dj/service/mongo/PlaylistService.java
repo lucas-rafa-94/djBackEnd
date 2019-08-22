@@ -87,6 +87,7 @@ public class PlaylistService {
         List<String> emails = new ArrayList<>();
         boolean jaVotou = false;
         for(int i = 0; i < playlistModel.getTrackSelectedModelList().size(); i++){
+
             if (playlistModel.getTrackSelectedModelList().get(i).getMusic().equals(music)){
 
                 if(playlistModel.getTrackSelectedModelList().get(i).getUsersVoted() != null) {
@@ -107,11 +108,13 @@ public class PlaylistService {
                         emails.add(email);
 
                     }else{
+//                        playlistModel.getTrackSelectedModelList().get(i).getUsersVoted();
                         emails.add(email);
+                        playlistModel.getTrackSelectedModelList().get(i).setUsersVoted(emails);
                     }
                 }
-                emails = playlistModel.getTrackSelectedModelList().get(i).getUsersVoted();
-                playlistModel.getTrackSelectedModelList().get(i).setUsersVoted(emails);
+//                emails = playlistModel.getTrackSelectedModelList().get(i).getUsersVoted();
+//                playlistModel.getTrackSelectedModelList().get(i).setUsersVoted(emails);
                 playlistRepository.save(playlistModel);
             }
         }

@@ -13,6 +13,11 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.function.Function;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
 @Service
 public class SearchMusicService {
@@ -85,6 +90,7 @@ public class SearchMusicService {
         return tracksArrayOutput;
     }
 
+<<<<<<< HEAD
 
         public List<TbJukeboxMusic> getTracksFromPlaylist(String playlist){
 
@@ -123,3 +129,36 @@ public class SearchMusicService {
         }
     }
 
+=======
+    public List<TracksModel> getTracks(String track){
+
+        List<TracksModel> tracksArrayOutput = new ArrayList<>();
+        JSONArray tracksArrayInput = new JSONObject(spotifyCaller.getTracks(track).getBody()).getJSONObject("tracks").getJSONArray("items");
+
+        for (int i = 0; i < tracksArrayInput.length(); i++){
+
+            TracksModel tracksModel = new TracksModel();
+            tracksModel.setId(tracksArrayInput.getJSONObject(i).getString("id"));
+            tracksModel.setName(tracksArrayInput.getJSONObject(i).getString("name"));
+            tracksModel.setArtist(tracksArrayInput.getJSONObject(i).getJSONArray("artists").getJSONObject(0).getString("name"));
+
+            if(!tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").toString().equals("[]")){
+                tracksModel.setPhotoUri(tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").getJSONObject(0).getString("url"));
+            }
+            tracksArrayOutput.add(tracksModel);
+        }
+
+        List<TracksModel> distinctElements = tracksArrayOutput.stream()
+                .filter( distinctByKey(p -> p.getArtist()) )
+                .collect( Collectors.toList() );
+
+        return distinctElements;
+    }
+
+    public static <T> Predicate<T> distinctByKey(Function<? super T, Object> keyExtractor)
+    {
+        Map<Object, Boolean> map = new ConcurrentHashMap<>();
+        return t -> map.putIfAbsent(keyExtractor.apply(t), Boolean.TRUE) == null;
+    }
+}
+>>>>>>> 7e571caa7b9208d42d481d22e1a2f1b971e3ddcf
