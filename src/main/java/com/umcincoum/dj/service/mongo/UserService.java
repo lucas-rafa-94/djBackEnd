@@ -30,7 +30,7 @@ public class UserService {
 
                 UserModel userModel1 = new UserModel();
                 userModel1.setEmail(userModel.getEmail().toLowerCase());
-                userModel1.setPassword(userModel.getEmail());
+                userModel1.setPassword(userModel.getPassword());
 
                 userRepository.save(userModel1);
 
