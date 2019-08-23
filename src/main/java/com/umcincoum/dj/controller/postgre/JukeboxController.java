@@ -3,8 +3,10 @@ package com.umcincoum.dj.controller.postgre;
 
 import com.umcincoum.dj.model.postgre.TbJukeboxArtist;
 import com.umcincoum.dj.model.postgre.TbJukeboxMusic;
+import com.umcincoum.dj.model.postgre.TbJukeboxSugestao;
 import com.umcincoum.dj.service.postgre.TbJukeboxArtistService;
 import com.umcincoum.dj.service.postgre.TbJukeboxMusicService;
+import com.umcincoum.dj.service.postgre.TbJukeboxSugestaoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -18,6 +20,9 @@ public class JukeboxController {
 
     @Autowired
     TbJukeboxArtistService tbJukeboxArtistService;
+
+    @Autowired
+    TbJukeboxSugestaoService tbJukeboxSugestaoService;
 
     @PostMapping
     public void saveMusic(List<TbJukeboxMusic> tbJukeboxMusic){
@@ -51,5 +56,10 @@ public class JukeboxController {
     @GetMapping("/playlist/{playlist}/filter")
     public List<TbJukeboxMusic> getByMusicsByPlaylist(@PathVariable String playlist, @RequestParam String music){
         return tbJukeboxMusicService.queryByPlaylistFilterMusic(playlist, music.toUpperCase());
+    }
+
+    @PostMapping("sugestao")
+    public void saveSugestao(@RequestBody TbJukeboxSugestao tbJukeboxSugestao){
+        tbJukeboxSugestaoService.save(tbJukeboxSugestao);
     }
 }
