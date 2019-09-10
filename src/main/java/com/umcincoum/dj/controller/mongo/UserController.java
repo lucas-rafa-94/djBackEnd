@@ -40,4 +40,9 @@ public class UserController {
     }
 
 
+    @PostMapping("/update-password")
+    public void updatePassword (@RequestBody UserModel user){
+         userService.updatePassword(user);
+    }
+
 }

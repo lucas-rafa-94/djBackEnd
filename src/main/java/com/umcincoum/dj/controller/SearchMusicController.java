@@ -32,8 +32,8 @@ public class SearchMusicController {
     }
 
     @GetMapping("/playlist/{id}")
-    public void loadPlaylist(@PathVariable("id") String id){
-        tbJukeboxMusicService.loadPlaylist(id);
+    public void loadPlaylist(@PathVariable("id") String id, @RequestParam int offset){
+        tbJukeboxMusicService.loadPlaylist(id, offset);
     }
 
     @GetMapping("/artist")
@@ -41,8 +41,6 @@ public class SearchMusicController {
         return searchMusicService.getTracksFromArtistWithTrack(name,track);
     }
 
-    @GetMapping("/by-track")
-    public List<TracksModel> getTracksFromArtist(@RequestParam("track") String track){
-        return searchMusicService.getTracks(track);
-    }
+
+
 }

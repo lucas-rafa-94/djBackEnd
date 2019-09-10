@@ -98,7 +98,7 @@ public class SpotifyCaller {
         return restTemplate.exchange(finalUri, HttpMethod.GET, entity, String.class);
     }
 
-    public ResponseEntity<String> getTracksFromPlaylist(String playlist){
+    public ResponseEntity<String> getTracksFromPlaylist(String playlist, int offset){
         String finalUri = "";
 
         HttpHeaders headers = new HttpHeaders();
@@ -108,7 +108,8 @@ public class SpotifyCaller {
 
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString("https://api.spotify.com/v1/users/" + user + "/playlists/" + playlist)
-                .queryParam("fields", "tracks.items(artist,track(id,name,album(artists,name,images)))");
+                .queryParam("fields", "tracks.items(artist,track(id,name,album(artists,name,images)))")
+                .queryParam("offset", Integer.toString(offset));
 
 
 

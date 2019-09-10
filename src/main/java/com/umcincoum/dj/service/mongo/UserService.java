@@ -133,5 +133,11 @@ public class UserService {
         return userQuery;
     }
 
+    public void updatePassword(UserModel userModel){
+        UserModel userModelQuery = userRepository.findByEmail(userModel.getEmail().toLowerCase());
+        userModelQuery.setPassword(userModel.getPassword());;
+        userRepository.save(userModelQuery);
+    }
+
 
 }

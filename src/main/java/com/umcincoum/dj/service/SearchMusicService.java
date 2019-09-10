@@ -60,6 +60,7 @@ public class SearchMusicService {
             TracksModel tracksModel = new TracksModel();
             tracksModel.setId(tracksArrayInput.getJSONObject(i).getString("id"));
             tracksModel.setName(tracksArrayInput.getJSONObject(i).getString("name"));
+            tracksModel.setAlbum(tracksArrayInput.getJSONObject(i).getJSONObject("album").getString("name"));
 
             if(!tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").toString().equals("[]")){
                 tracksModel.setPhotoUri(tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").getJSONObject(0).getString("url"));
@@ -80,7 +81,7 @@ public class SearchMusicService {
             TracksModel tracksModel = new TracksModel();
             tracksModel.setId(tracksArrayInput.getJSONObject(i).getString("id"));
             tracksModel.setName(tracksArrayInput.getJSONObject(i).getString("name"));
-
+            tracksModel.setAlbum(tracksArrayInput.getJSONObject(i).getJSONObject("album").getString("name"));
             if (!tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").toString().equals("[]")) {
                 tracksModel.setPhotoUri(tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").getJSONObject(0).getString("url"));
             }
@@ -92,11 +93,11 @@ public class SearchMusicService {
 
 
 
-        public List<TbJukeboxMusic> getTracksFromPlaylist(String playlist){
+        public List<TbJukeboxMusic> getTracksFromPlaylist(String playlist, int offset){
 
             List<TbJukeboxMusic> tracksArrayOutput = new ArrayList<>();
             List<TbJukeboxArtist> tbJukeboxArtistList = new ArrayList<>();
-            JSONArray tracksArrayInput = new JSONObject(spotifyCaller.getTracksFromPlaylist(playlist).getBody()).getJSONObject("tracks").getJSONArray("items");
+            JSONArray tracksArrayInput = new JSONObject(spotifyCaller.getTracksFromPlaylist(playlist, offset).getBody()).getJSONObject("tracks").getJSONArray("items");
 
             for (int i = 0; i < tracksArrayInput.length(); i++){
 

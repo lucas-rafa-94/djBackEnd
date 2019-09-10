@@ -20,8 +20,8 @@ public class TbJukeboxMusicService {
         tbJukeboxMusicRepository.saveAll(tbJukeboxMusic);
     }
 
-    public void loadPlaylist(String playlist){
-        saveAll(searchMusicService.getTracksFromPlaylist(playlist));
+    public void loadPlaylist(String playlist, int offset){
+        saveAll(searchMusicService.getTracksFromPlaylist(playlist, offset));
     }
 
     public List<TbJukeboxMusic> queryByArtist(String artist, String playlist){

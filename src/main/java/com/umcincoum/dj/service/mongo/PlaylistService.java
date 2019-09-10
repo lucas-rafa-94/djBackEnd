@@ -68,7 +68,7 @@ public class PlaylistService {
 
         PlaylistModel playlistModel = new PlaylistModel();
         playlistModel = playlistRepository.findByPlaylist(playlist);
-    if(playlistModel.getTrackSelectedModelList() != null){
+        if(playlistModel.getTrackSelectedModelList() != null){
         List<TrackSelectedModel> trackSelectedModelList = playlistModel.getTrackSelectedModelList();
 
         Collections.sort(trackSelectedModelList,
