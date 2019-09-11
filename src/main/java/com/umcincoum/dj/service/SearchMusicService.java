@@ -144,7 +144,7 @@ public class SearchMusicService {
             tracksModel.setId(tracksArrayInput.getJSONObject(i).getString("id"));
             tracksModel.setName(tracksArrayInput.getJSONObject(i).getString("name"));
             tracksModel.setArtist(tracksArrayInput.getJSONObject(i).getJSONArray("artists").getJSONObject(0).getString("name"));
-
+            tracksModel.setAlbum(tracksArrayInput.getJSONObject(i).getJSONObject("album").getString("name"));
             if(!tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").toString().equals("[]")){
                 tracksModel.setPhotoUri(tracksArrayInput.getJSONObject(i).getJSONObject("album").getJSONArray("images").getJSONObject(0).getString("url"));
             }
