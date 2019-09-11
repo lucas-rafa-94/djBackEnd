@@ -39,15 +39,24 @@ public class SpotifyCaller {
     }
 
     public ResponseEntity<String> getArtistsSpotCaller(String artist){
-
+        String newArtist = "";
         HttpHeaders headers = new HttpHeaders();
         RestTemplate restTemplate = new RestTemplate();
 
         headers.add("Authorization", "Bearer " + tokenSpotCaller());
 
+        if(artist.contains(" ")){
+            newArtist = artist.replace(" ","+");
+        }else if(artist.contains("%20")){
+            newArtist = artist.replace("%20","+");
+        }else {
+            newArtist = artist;
+        }
+
+        System.out.println(newArtist);
         UriComponentsBuilder builder = UriComponentsBuilder
                 .fromUriString("https://api.spotify.com/v1/search")
-                .queryParam("q", artist + "*")
+                .queryParam("q", newArtist + "*")
                 .queryParam("type", "artist");
 
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
@@ -84,8 +93,6 @@ public class SpotifyCaller {
                 .queryParam("q", "artist:" + artist + " track:" + track + "*")
                 .queryParam("type", "track")
                 .queryParam("market", "BR");
-
-
 
         try{
             finalUri = URLDecoder.decode(builder.toUriString(), "UTF-8");
