@@ -112,8 +112,8 @@ public class SearchMusicService {
                 tbJukeboxArtist.setName(tracksArrayInput.getJSONObject(i).getJSONObject("track").getJSONObject("album").getJSONArray("artists").getJSONObject(0).getString("name").toUpperCase());
                 tbJukeboxArtist.setId(tracksArrayInput.getJSONObject(i).getJSONObject("track").getJSONObject("album").getJSONArray("artists").getJSONObject(0).getString("id").toUpperCase());
 
-                tracksModel.setPlaylist(playlist);
-                tbJukeboxArtist.setPlaylist(playlist);
+                tracksModel.setPlaylist("todos");
+                tbJukeboxArtist.setPlaylist("todos");
 
                 if(!tracksArrayInput.getJSONObject(i).getJSONObject("track").getJSONObject("album").getJSONArray("images").toString().equals("[]")){
                     tracksModel.setUriImage(tracksArrayInput.getJSONObject(i).getJSONObject("track").getJSONObject("album").getJSONArray("images").getJSONObject(0).getString("url"));

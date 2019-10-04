@@ -9,6 +9,6 @@ import java.util.List;
 
 @Repository
 public interface TbJukeboxArtistRepository extends CrudRepository<TbJukeboxArtist, String> {
-    List<TbJukeboxArtist> findByPlaylist(String playlist);
+    List<TbJukeboxArtist> findByPlaylistOrderByName(String playlist);
     List<TbJukeboxArtist> findByPlaylistAndNameContains(String playlist, String name);
 }

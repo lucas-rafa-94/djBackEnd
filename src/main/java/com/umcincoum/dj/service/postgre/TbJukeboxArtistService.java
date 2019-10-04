@@ -18,7 +18,7 @@ public class TbJukeboxArtistService {
     }
 
     public List<TbJukeboxArtist> findArtistsByPlaylist(String playlist){
-        return tbJukeboxArtistRepository.findByPlaylist(playlist);
+        return tbJukeboxArtistRepository.findByPlaylistOrderByName(playlist);
     }
 
     public List<TbJukeboxArtist> findByPlaylistAndArtist(String playlist, String name){

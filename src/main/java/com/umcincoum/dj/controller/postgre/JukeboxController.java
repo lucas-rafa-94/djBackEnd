@@ -62,4 +62,7 @@ public class JukeboxController {
     public void saveSugestao(@RequestBody TbJukeboxSugestao tbJukeboxSugestao){
         tbJukeboxSugestaoService.save(tbJukeboxSugestao);
     }
+
+
+
 }

@@ -31,6 +31,12 @@ public class PlaylistController {
         return playlistService.getPlaylistFromId(playlist);
     }
 
+    @GetMapping("/top-10")
+
+    public PlaylistModel getPlaylistsFromIdTop(){
+        return playlistService.getPlaylistFromIdTop("jukeboxpop");
+    }
+
     @PostMapping("/{playlist}/vote")
     public void voteOnMusicByPlaylist(@PathVariable String playlist, @RequestParam String email, @RequestParam String music){
         playlistService.voteOnMusicByPlaylist(music,playlist,email);

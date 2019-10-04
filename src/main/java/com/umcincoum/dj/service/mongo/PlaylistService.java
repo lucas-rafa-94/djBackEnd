@@ -81,9 +81,44 @@ public class PlaylistService {
         return playlistModel;
     }
 
-    public void voteOnMusicByPlaylist (String music, String playlist, String email ){
+    public PlaylistModel getPlaylistFromIdTop(String playlist){
+
         PlaylistModel playlistModel = new PlaylistModel();
         playlistModel = playlistRepository.findByPlaylist(playlist);
+
+        if(playlistModel.getTrackSelectedModelList() != null){
+            List<TrackSelectedModel> trackSelectedModelList = playlistModel.getTrackSelectedModelList();
+
+            Collections.sort(trackSelectedModelList,
+                    Comparator.comparingInt(TrackSelectedModel::getLikes).reversed());
+
+            playlistModel.setTrackSelectedModelList(trackSelectedModelList);
+        }
+
+        List<TrackSelectedModel> trackSelectedModelList = playlistModel.getTrackSelectedModelList();
+        List<TrackSelectedModel> top = new ArrayList<>();
+
+        if(trackSelectedModelList.size() > 10){
+            for(int i = 0; i < 10; i++){
+                top.add(trackSelectedModelList.get(i));
+            }
+        }else{
+            for(int i = 0; i < trackSelectedModelList.size(); i++){
+                top.add(trackSelectedModelList.get(i));
+            }
+        }
+
+        playlistModel.setTrackSelectedModelList(top);
+
+        return playlistModel;
+    }
+
+
+
+
+    public void voteOnMusicByPlaylist (String music, String playlist, String email ){
+        PlaylistModel playlistModel = new PlaylistModel();
+        playlistModel = playlistRepository.findByPlaylist("jukeboxpop");
         List<String> emails = new ArrayList<>();
         boolean jaVotou = false;
         for(int i = 0; i < playlistModel.getTrackSelectedModelList().size(); i++){
